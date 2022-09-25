@@ -1,12 +1,17 @@
 import { useState } from 'react'
 import reactLogo from './assets/react.svg'
-import './App.css'
+import './App.css';
+// import { t } from 'i18next';
+import {useTranslation} from "react-i18next";
 
 function App() {
   const [count, setCount] = useState(0)
-
+  const {t, i18n} = useTranslation()
   return (
     <div className="App">
+      <div>
+        <h2>{ t('learnReact') }</h2>
+      </div>
       <div>
         <a href="https://vitejs.dev" target="_blank">
           <img src="/vite.svg" className="logo" alt="Vite logo" />
