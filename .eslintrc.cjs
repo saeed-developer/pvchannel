@@ -3,6 +3,11 @@ module.exports = {
         "browser": true,
         "es2021": true
     },
+    "settings": {
+        "react": {
+          "version": 'detect'
+        },
+    },
     "extends": [
         "eslint:recommended",
         "plugin:react/recommended",
@@ -20,5 +25,20 @@ module.exports = {
         "@typescript-eslint"
     ],
     "rules": {
+        "react/react-in-jsx-scope": "off",
+        "quotes": [
+            "error",
+            "double",
+            {
+                "avoidEscape": true
+            }
+        ],
+        "@typescript-eslint/quotes": [
+            "error",
+            "double",
+            {
+                "avoidEscape": true
+            }
+        ],
     }
 }
