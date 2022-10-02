@@ -9,11 +9,14 @@
     "preview": "vite preview",
     "lint": "eslint \"**/*.{ts,tsx}\"",
     "lint:fix": "eslint --fix \"**/*.{ts,tsx}\"",
+    "prepare": "husky install",
     "pre-commit": "lint-staged"
   },
   "lint-staged": {
-    "src/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
-      "prettier --write"
+    "**/*.{js,jsx,ts,tsx}": [
+      "yarn eslint",
+      "yarn prettier --write",
+      "yarn test --watchAll=false --findRelatedTests --bail"
     ]
   },
   "dependencies": {
