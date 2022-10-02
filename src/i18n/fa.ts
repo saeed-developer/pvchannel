@@ -1,3 +1,3 @@
 export default {
-  learnReact: "صفحه اصلی"
+  learnReact: 'صفحه اصلی',
 };

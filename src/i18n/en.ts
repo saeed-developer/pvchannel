@@ -1,3 +1,3 @@
 export default {
-  mainPage: "صفحه اصلی",
+  mainPage: 'صفحه اصلی',
 };
