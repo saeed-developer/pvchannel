@@ -1551,6 +1551,11 @@
   dependencies:
     "void-elements" "3.1.0"
 
+"husky@^8.0.1":
+  "integrity" "sha512-xs7/chUH/CKdOCs7Zy0Aev9e/dKOMZf3K1Az1nar3tzlv0jfqnYtu235bstsWTmXOR0EfINrPa97yy4Lz6RiKw=="
+  "resolved" "https://registry.npmjs.org/husky/-/husky-8.0.1.tgz"
+  "version" "8.0.1"
+
 "i18next@^21.9.2", "i18next@>= 19.0.0":
   "integrity" "sha512-00fVrLQOwy45nm3OtC9l1WiLK3nJlIYSljgCt0qzTaAy65aciMdRy9GsuW+a2AtKtdg9/njUGfRH30LRupV7ZQ=="
   "resolved" "https://registry.npmjs.org/i18next/-/i18next-21.9.2.tgz"
