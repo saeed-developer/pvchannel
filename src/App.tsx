@@ -2,13 +2,15 @@ import { useState } from 'react';
 import reactLogo from './assets/react.svg';
 import './App.css';
 import { useTranslation } from 'react-i18next';
+import { Route, Routes } from "react-router-dom";
+import { routes } from './router';
 
 function App() {
   const [count, setCount] = useState(0);
   const { t } = useTranslation();
   return (
     <div className='App'>
-      <div>
+      {/* <div>
         <h2>{t('learnReact')}</h2>
       </div>
       <div>
@@ -30,7 +32,18 @@ function App() {
       </div>
       <p className='read-the-docs'>
         Click on the Vite and React logos to learn more
-      </p>
+      </p> */}
+      <Routes>
+        {routes.map((route) => {
+          return (
+            <Route
+            key={route.path}
+            path={route.path}
+            element={<route.component />}
+            />
+          )
+        })}
+      </Routes>
     </div>
   );
 }
