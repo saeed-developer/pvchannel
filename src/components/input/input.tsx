@@ -1,7 +1,6 @@
 import React from 'react';
 
-function Input({...props}) {
-
+function Input({ ...props }) {
   return (
     <div className='my-8'>
       <input
@@ -16,4 +15,4 @@ function Input({...props}) {
   );
 }
 
-export default Input
+export default Input;

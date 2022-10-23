@@ -1,27 +1,11 @@
-import React from 'react';
-import { useForm, Controller } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import Input from '../../components/input';
-import { useMutation, useQueryClient } from 'react-query';
-import { login } from '../../services/loginApi';
-
-// post data
-// const api = process.env.API_KEY;
-const api = 'pvchannel.ir/auth/login';
-
-const postData = async (user: any) => {
-  const response = await fetch(api, {
-    method: 'POST',
-    body: JSON.stringify({
-      username: user.username,
-      password: user.password,
-    }),
-    headers: {
-      'Content-type': 'application/json; charset-UTF-8',
-    },
-  });
-  return response.json();
-};
+// import { useMutation, useQueryClient } from 'react-query';
+// import { api } from '../../services/api';
+import { useDispatch, useSelector } from 'react-redux';
+import { userLogin } from '../../redux/features/auth/action';
+import { AppDispatch, RootState } from '../../redux/store/store';
 
 //
 
@@ -31,6 +15,35 @@ function Login() {
     userName: string;
     password: string;
   };
+
+  const dispatch: AppDispatch = useDispatch();
+  const { error, isLoading } = useSelector((state: RootState) => state.user);
+
+  // if (error) {
+  //   console.log('some thing is wrong');
+  //   // return 'some thing is wrong';
+  // }
+  if (error) {
+    console.log('some thingggg is wrong');
+    // return 'some thing is wrong';
+  }
+  console.log('error', error);
+  console.log('isLoading', isLoading);
+
+  // async function createName(data) {
+  //   try {
+  //     const response = await api.post('auth/login', {
+  //       username: data.username,
+  //       password: data.password,
+  //       // username: 'Finn',
+  //       // password: 'Williams',
+  //     });
+  //     console.log(data);
+  //     console.log('data', response.data);
+  //   } catch (error) {
+  //     console.log(error.response.data);
+  //   }
+  // }
 
   const { handleSubmit, control } = useForm<FormValues>({
     mode: 'onChange',
@@ -42,23 +55,23 @@ function Login() {
   });
 
   // post data
-  const queryClient = useQueryClient();
-  // const addTodoMutation = useMutation(login,{})
+  // const queryClient = useQueryClient();
+  // // const addTodoMutation = useMutation(login,{})
 
-  const { mutate, isLoading, isError } = useMutation(login, {
-    onSuccess: (successData) => {
-      queryClient.invalidateQueries('auth');
-      console.log(successData);
-    },
-  });
+  // const { mutate, isLoading, isError } = useMutation(createName, {
+  //   onSuccess: (successData) => {
+  //     queryClient.invalidateQueries('auth');
+  //     console.log('successData', successData);
+  //   },
+  // });
 
-  if (isLoading) {
-    return <p>Loading...</p>;
-  }
+  // if (isLoading) {
+  //   return <p>Loading...</p>;
+  // }
 
-  if (isError) {
-    return <p>Something is wrong</p>;
-  }
+  // if (isError) {
+  //   return <p>Something is wrong</p>;
+  // }
 
   //
   return (
@@ -66,9 +79,14 @@ function Login() {
       <form
         onSubmit={handleSubmit((data) => {
           const employee = {
-            ...data,
+            username: data.userName,
+            password: data.password,
           };
-          mutate(employee);
+          dispatch(userLogin(employee));
+          if (error) {
+            console.log('some thing is wrong', data);
+            // return 'some thing is wrong';
+          }
         })}
         className='h-2/4 my-auto mr-10 p-2 flex-1'
       >
