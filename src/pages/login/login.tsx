@@ -1,13 +1,11 @@
 import { Controller, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import Input from '../../components/input';
-// import { useMutation, useQueryClient } from 'react-query';
-// import { api } from '../../services/api';
 import { useDispatch, useSelector } from 'react-redux';
 import { userLogin } from '../../redux/features/auth/action';
 import { AppDispatch, RootState } from '../../redux/store/store';
-
-//
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function Login() {
   const { t } = useTranslation();
@@ -19,31 +17,14 @@ function Login() {
   const dispatch: AppDispatch = useDispatch();
   const { error, isLoading } = useSelector((state: RootState) => state.user);
 
-  // if (error) {
-  //   console.log('some thing is wrong');
-  //   // return 'some thing is wrong';
-  // }
+  // toast.error('email or password is wrong');
+
   if (error) {
-    console.log('some thingggg is wrong');
-    // return 'some thing is wrong';
+    console.log('error');
+    // toast.error('email or password is wrong');
   }
   console.log('error', error);
   console.log('isLoading', isLoading);
-
-  // async function createName(data) {
-  //   try {
-  //     const response = await api.post('auth/login', {
-  //       username: data.username,
-  //       password: data.password,
-  //       // username: 'Finn',
-  //       // password: 'Williams',
-  //     });
-  //     console.log(data);
-  //     console.log('data', response.data);
-  //   } catch (error) {
-  //     console.log(error.response.data);
-  //   }
-  // }
 
   const { handleSubmit, control } = useForm<FormValues>({
     mode: 'onChange',
@@ -54,28 +35,9 @@ function Login() {
     },
   });
 
-  // post data
-  // const queryClient = useQueryClient();
-  // // const addTodoMutation = useMutation(login,{})
-
-  // const { mutate, isLoading, isError } = useMutation(createName, {
-  //   onSuccess: (successData) => {
-  //     queryClient.invalidateQueries('auth');
-  //     console.log('successData', successData);
-  //   },
-  // });
-
-  // if (isLoading) {
-  //   return <p>Loading...</p>;
-  // }
-
-  // if (isError) {
-  //   return <p>Something is wrong</p>;
-  // }
-
-  //
   return (
     <div className='w-full h-[100vh] flex text-black'>
+      <ToastContainer />
       <form
         onSubmit={handleSubmit((data) => {
           const employee = {
@@ -84,7 +46,7 @@ function Login() {
           };
           dispatch(userLogin(employee));
           if (error) {
-            console.log('some thing is wrong', data);
+            toast.error('email or password is wrong');
             // return 'some thing is wrong';
           }
         })}
@@ -96,7 +58,7 @@ function Login() {
         <Controller
           name='userName'
           control={control}
-          rules={{ required: 'this is requerd' }}
+          rules={{ required: `${t('required')}` }}
           render={(props) => (
             <Input {...props} type='userName' placeholder={t('userName')} />
           )}
@@ -106,8 +68,8 @@ function Login() {
           name='password'
           control={control}
           rules={{
-            required: 'this is requerd',
-            maxLength: { value: 8, message: 'You exceeded the max length' },
+            required: `${t('required')}`,
+            maxLength: { value: 8, message: `${t('maxLength')}` },
           }}
           render={(props) => (
             <Input {...props} type='password' placeholder={t('password')} />
