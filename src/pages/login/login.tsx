@@ -9,6 +9,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 function Login() {
   const { t } = useTranslation();
+
   type FormValues = {
     userName: string;
     password: string;
@@ -17,14 +18,13 @@ function Login() {
   const dispatch: AppDispatch = useDispatch();
   const { error, isLoading } = useSelector((state: RootState) => state.user);
 
-  // toast.error('email or password is wrong');
-
   if (error) {
     console.log('error');
-    // toast.error('email or password is wrong');
   }
-  console.log('error', error);
-  console.log('isLoading', isLoading);
+
+  if (isLoading) {
+    console.log('isLoading');
+  }
 
   const { handleSubmit, control } = useForm<FormValues>({
     mode: 'onChange',
@@ -47,10 +47,9 @@ function Login() {
           dispatch(userLogin(employee));
           if (error) {
             toast.error('email or password is wrong');
-            // return 'some thing is wrong';
           }
         })}
-        className='h-2/4 my-auto mr-10 p-2 flex-1'
+        className='h-2/4 my-auto mx-10 p-2 flex-1'
       >
         <h2 className='font-bold text-3xl border-b-4 mx-auto my-2 border-yellow-500 w-fit'>
           {t('login')}
@@ -81,7 +80,11 @@ function Login() {
           className='bg-yellow-500 py-1 px-2 w-52 text-xl mt-6 cursor-pointer rounded-md text-gray-900'
         />
       </form>
-      <div className='flex-3 bg-yellow-500 w-8/12 h-full clip-style'></div>
+      <div
+        className={`flex-3 bg-yellow-500 w-8/12 h-full ${
+          document.body.dir === 'rtl' ? 'clip-rtl-style' : 'clip-ltr-style'
+        } `}
+      ></div>
     </div>
   );
 }

@@ -1,0 +1,8 @@
+{
+  "login": "login",
+  "userName": "userName",
+  "password": "password",
+  "forgetPass": "forgetPassword?",
+  "required": "this is requerd",
+  "maxLength": "You exceeded the max length"
+}

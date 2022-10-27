@@ -1,20 +1,21 @@
-import { initReactI18next } from 'react-i18next';
 import i18n from 'i18next';
-import en from './en';
-import fa from './fa';
+import { initReactI18next } from 'react-i18next';
+import translationEN from './en.json';
+import translationHE from './fa.json';
 
 const resources = {
   en: {
-    translation: en,
+    translation: translationEN,
   },
   fa: {
-    translation: fa,
+    translation: translationHE,
   },
 };
 
 i18n.use(initReactI18next).init({
   resources,
-  lng: 'fa',
+  lng: 'en',
+  keySeparator: false,
   interpolation: {
     escapeValue: false,
   },
