@@ -5,7 +5,7 @@ export type TLogin = {
   password: string;
 };
 export type TRefresh = {
-  refreshToken: string;
+  refresh: string;
 };
 const login = async (body: TLogin) => {
   return await api.post(LOGIN(), body);

@@ -22,7 +22,7 @@ const useAuth = () => {
       setLoading(false);
     } else if (token.refresh) {
       mutation.mutate(
-        { refreshToken: token.refresh as string },
+        { refresh: token.refresh as string },
         {
           onSuccess: (data) => {
             setToken(data.data);
