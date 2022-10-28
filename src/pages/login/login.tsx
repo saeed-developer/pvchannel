@@ -1,30 +1,39 @@
 import { Controller, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import Input from '../../components/input';
-import { useDispatch, useSelector } from 'react-redux';
-import { userLogin } from '../../redux/features/auth/action';
-import { AppDispatch, RootState } from '../../redux/store/store';
+import Input from '../../components/input/global/input';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useMutation } from 'react-query';
+import { login, TLogin } from '../../services/authSrv';
+import {
+  setAuth,
+  setLogin,
+  setToken,
+} from '../../redux/features/auth/authSlice';
+import { useDispatch } from 'react-redux';
+import {
+  BrowserRouter,
+  Navigate,
+  redirect,
+  useNavigate,
+} from 'react-router-dom';
 
 function Login() {
   const { t } = useTranslation();
-
+  const dispatch = useDispatch();
+  const nav = useNavigate();
+  const mutation = useMutation((body: TLogin) => login(body), {
+    onSuccess: (data) => {
+      // dispatch(setLogin(true));
+      // dispatch(setToken(data.data));
+      dispatch(setAuth({ isLogin: true, token: data.data }));
+      nav('/', { replace: true });
+    },
+  });
   type FormValues = {
     userName: string;
     password: string;
   };
-
-  const dispatch: AppDispatch = useDispatch();
-  const { error, isLoading } = useSelector((state: RootState) => state.user);
-
-  if (error) {
-    console.log('error');
-  }
-
-  if (isLoading) {
-    console.log('isLoading');
-  }
 
   const { handleSubmit, control } = useForm<FormValues>({
     mode: 'onChange',
@@ -44,10 +53,7 @@ function Login() {
             username: data.userName,
             password: data.password,
           };
-          dispatch(userLogin(employee));
-          if (error) {
-            toast.error('email or password is wrong');
-          }
+          mutation.mutate(employee);
         })}
         className='h-2/4 my-auto mx-10 p-2 flex-1'
       >
@@ -78,6 +84,7 @@ function Login() {
           type='submit'
           value={t('login')}
           className='bg-yellow-500 py-1 px-2 w-52 text-xl mt-6 cursor-pointer rounded-md text-gray-900'
+          style={mutation.isLoading ? { opacity: 0.7 } : { opacity: 1 }}
         />
       </form>
       <div

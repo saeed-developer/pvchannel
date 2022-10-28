@@ -1,55 +1,37 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { userLogin } from './action';
-
-export interface AuthError {
-  message: string;
-}
-
-// initialize userToken from local storage
-// const userToken = localStorage.getItem('userToken')
-//   ? localStorage.getItem('userToken')
-//   : null;
-
-export interface AuthState {
-  isAuth: boolean;
-  user: string;
-  currentUser?: CurrentUser;
-  isLoading: boolean;
-  error: boolean;
-}
-
-export interface CurrentUser {
-  username: string;
-  password: string;
-}
-
-export const initialState: AuthState = {
-  isAuth: false,
-  user: '',
-  isLoading: false,
-  error: false,
-  // error: { message: 'An Error occurred' },
+import type { PayloadAction } from '@reduxjs/toolkit';
+export type TToken = {
+  access: string | null;
+  refresh: string | null;
 };
+export interface IAuth {
+  isLogin: boolean;
+  token: TToken;
+}
+const initialState = {
+  isLogin: false,
+  token: {
+    access: null,
+    refresh: null,
+  },
+} as IAuth;
 
-export const authSlice = createSlice({
+const counterSlice = createSlice({
   name: 'auth',
   initialState,
-  reducers: {},
-  extraReducers: (builder) => {
-    builder
-      .addCase(userLogin.pending, (state) => {
-        state.isLoading = true;
-      })
-      .addCase(userLogin.rejected, (state) => {
-        state.isLoading = false;
-        state.error = true;
-      })
-      .addCase(userLogin.fulfilled, (state, { payload }) => {
-        state.isLoading = false;
-        state.error = false;
-        state.user = payload;
-      });
+  reducers: {
+    setLogin(state, action: PayloadAction<boolean>) {
+      state.isLogin = action.payload;
+    },
+    setToken(state, action: PayloadAction<TToken>) {
+      state.token = action.payload;
+    },
+    setAuth(state, action: PayloadAction<IAuth>) {
+      return { ...state, ...action.payload };
+    },
+    resetAuth: () => initialState,
   },
 });
 
-export default authSlice.reducer;
+export const { setLogin, setToken, resetAuth, setAuth } = counterSlice.actions;
+export default counterSlice.reducer;

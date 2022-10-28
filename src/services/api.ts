@@ -1,7 +1,8 @@
+import { IAuth } from './../redux/features/auth/authSlice';
+import { RootState, store } from './../redux/store/store';
 import axios from 'axios';
-import authHeader from './authHeader';
-
+const auth: IAuth = store.getState().auth;
 export const api = axios.create({
   baseURL: 'http://185.235.40.10/',
-  headers: authHeader(),
 });
+api.defaults.headers.common['token'] = auth.token.access;
