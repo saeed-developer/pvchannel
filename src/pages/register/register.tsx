@@ -11,7 +11,7 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
-function Login() {
+function Register() {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const nav = useNavigate();
@@ -22,16 +22,22 @@ function Login() {
     },
   });
   type FormValues = {
+    number: string;
     userName: string;
     password: string;
+    firstName: string;
+    lastName: string;
   };
 
   const { handleSubmit, control } = useForm<FormValues>({
     mode: 'onChange',
     delayError: 500,
     defaultValues: {
+      number: '',
       userName: '',
       password: '',
+      firstName: '',
+      lastName: '',
     },
   });
 
@@ -41,8 +47,11 @@ function Login() {
       <form
         onSubmit={handleSubmit((data) => {
           const employee = {
+            number: data.number,
             username: data.userName,
             password: data.password,
+            firstName: data.firstName,
+            lastName: data.lastName,
           };
           mutation.mutate(employee);
         })}
@@ -51,12 +60,25 @@ function Login() {
         <h2 className='font-bold text-3xl border-b-4 mx-auto my-2 border-yellow-500 w-fit'>
           {t('login')}
         </h2>
+
+        <Controller
+          name='number'
+          control={control}
+          rules={{
+            minLength: { value: 11, message: `${t('minLength')}` },
+            maxLength: { value: 13, message: `${t('maxLength')}` },
+          }}
+          render={(props) => (
+            <Input {...props} type='text' placeholder={t('number')} />
+          )}
+        />
+
         <Controller
           name='userName'
           control={control}
           rules={{ required: `${t('required')}` }}
           render={(props) => (
-            <Input {...props} type='userName' placeholder={t('userName')} />
+            <Input {...props} type='text' placeholder={t('userName')} />
           )}
         />
 
@@ -71,6 +93,27 @@ function Login() {
             <Input {...props} type='password' placeholder={t('password')} />
           )}
         />
+
+        <Controller
+          name='firstName'
+          control={control}
+          rules={{ required: `${t('required')}` }}
+          render={(props) => (
+            <Input {...props} type='text' placeholder={t('firstName')} />
+          )}
+        />
+
+        <Controller
+          name='lastName'
+          control={control}
+          rules={{
+            required: `${t('required')}`,
+          }}
+          render={(props) => (
+            <Input {...props} type='text' placeholder={t('lastName')} />
+          )}
+        />
+
         <div className='mt-[-1.5rem] text-xs'>
           <span className='ursor-pointer'>{t('forgetPass')}</span>
           <Link
@@ -96,4 +139,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default Register;

@@ -2,7 +2,9 @@
   "login": "login",
   "userName": "userName",
   "password": "password",
-  "forgetPass": "forgetPassword?",
+  "forgetPass": "forget Password?",
   "required": "this is requerd",
-  "maxLength": "You exceeded the max length"
+  "minLength":"The number of characters is less than the limit.",
+  "maxLength": "You exceeded the max length",
+  "register": "register"
 }
