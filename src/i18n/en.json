@@ -6,5 +6,6 @@
   "required": "this is requerd",
   "minLength":"The number of characters is less than the limit.",
   "maxLength": "You exceeded the max length",
-  "register": "register"
+  "register": "register",
+  "have_account":"do you have account?"
 }

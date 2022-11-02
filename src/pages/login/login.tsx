@@ -75,7 +75,7 @@ function Login() {
           <span className='ursor-pointer'>{t('forgetPass')}</span>
           <Link
             to='/register'
-            className='mr-2 text-yellow-500 hover:text-yellow-600'
+            className='mx-2 text-yellow-500 hover:text-yellow-600'
           >
             {t('register')}
           </Link>

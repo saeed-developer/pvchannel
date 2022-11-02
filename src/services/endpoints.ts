@@ -5,3 +5,6 @@ export const LOGIN = (): string => {
 export const REFRESH = (): string => {
   return 'auth/refresh';
 };
+export const REGISTER = (): string => {
+  return 'auth/signup';
+};

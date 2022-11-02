@@ -5,25 +5,22 @@ import { ToastContainer } from 'react-toastify';
 // import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useMutation } from 'react-query';
-import { login, TLogin } from '../../services/authSrv';
-import { setAuth } from '../../redux/features/auth/authSlice';
-import { useDispatch } from 'react-redux';
+import { register, TRegister } from '../../services/authSrv';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
 function Register() {
   const { t } = useTranslation();
-  const dispatch = useDispatch();
   const nav = useNavigate();
-  const mutation = useMutation((body: TLogin) => login(body), {
-    onSuccess: (data) => {
-      dispatch(setAuth({ isLogin: true, token: data.data }));
-      nav('/', { replace: true });
+  const mutation = useMutation((body: TRegister) => register(body), {
+    onSuccess: () => {
+      nav('/login', { replace: true });
     },
   });
   type FormValues = {
     number: string;
-    userName: string;
+    email: string;
+    username: string;
     password: string;
     firstName: string;
     lastName: string;
@@ -34,7 +31,8 @@ function Register() {
     delayError: 500,
     defaultValues: {
       number: '',
-      userName: '',
+      email: '',
+      username: '',
       password: '',
       firstName: '',
       lastName: '',
@@ -48,7 +46,7 @@ function Register() {
         onSubmit={handleSubmit((data) => {
           const employee = {
             number: data.number,
-            username: data.userName,
+            username: data.username,
             password: data.password,
             firstName: data.firstName,
             lastName: data.lastName,
@@ -58,7 +56,7 @@ function Register() {
         className='h-2/4 my-auto mx-10 p-2 flex-1'
       >
         <h2 className='font-bold text-3xl border-b-4 mx-auto my-2 border-yellow-500 w-fit'>
-          {t('login')}
+          {t('register')}
         </h2>
 
         <Controller
@@ -74,7 +72,15 @@ function Register() {
         />
 
         <Controller
-          name='userName'
+          name='email'
+          control={control}
+          render={(props) => (
+            <Input {...props} type='email' placeholder={t('email')} />
+          )}
+        />
+
+        <Controller
+          name='username'
           control={control}
           rules={{ required: `${t('required')}` }}
           render={(props) => (
@@ -87,7 +93,7 @@ function Register() {
           control={control}
           rules={{
             required: `${t('required')}`,
-            maxLength: { value: 8, message: `${t('maxLength')}` },
+            minLength: { value: 8, message: `${t('minLength')}` },
           }}
           render={(props) => (
             <Input {...props} type='password' placeholder={t('password')} />
@@ -115,17 +121,17 @@ function Register() {
         />
 
         <div className='mt-[-1.5rem] text-xs'>
-          <span className='ursor-pointer'>{t('forgetPass')}</span>
+          <span className='ursor-pointer'>{t('have_account')}</span>
           <Link
-            to='/register'
-            className='mr-2 text-yellow-500 hover:text-yellow-600'
+            to='/login'
+            className='mx-2 text-yellow-500 hover:text-yellow-600'
           >
-            {t('register')}
+            {t('login')}
           </Link>
         </div>
         <input
           type='submit'
-          value={t('login')}
+          value={t('register')}
           className='bg-yellow-500 py-1 px-2 w-52 text-xl mt-6 cursor-pointer rounded-md text-gray-900'
           style={mutation.isLoading ? { opacity: 0.7 } : { opacity: 1 }}
         />
