@@ -1,34 +1,78 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import './App.css'
+import React, { Suspense } from 'react';
+import './App.css';
+import { Route, Routes } from 'react-router-dom';
+import { routes } from './router';
+import { useTranslation } from 'react-i18next';
+import ProtectedRoute from './components/input/global/protectedRoute';
+import useAuth from './utils/hooks/useAuth';
+import { useSelector } from 'react-redux';
+import { RootState } from './redux/store/store';
 
-function App() {
-  const [count, setCount] = useState(0)
+const App: React.FC = () => {
+  const { i18n } = useTranslation();
+  const [loading] = useAuth();
+  const login = useSelector((state: RootState) => state.auth.isLogin);
+
+  const changeLanguageHandler = (e: React.FormEvent) => {
+    const languageValue = (e.target as HTMLInputElement).value;
+    if (languageValue === 'fa') {
+      document.body.dir = 'rtl';
+    } else {
+      document.body.dir = 'ltr';
+    }
+    i18n.changeLanguage(languageValue);
+  };
 
   return (
-    <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+    <div className='App'>
+      {loading ? (
+        // This Line should be replaced with loading indicator
+        <div
+          style={{
+            alignItems: 'center',
+            justifyContent: 'center',
+            display: 'flex',
+            width: '100vw',
+            height: '100vh',
+          }}
+        >
+          ...loading
+        </div>
+      ) : (
+        <Suspense fallback={<div>Loading...</div>}>
+          <div>
+            <select
+              className='custom-select'
+              style={{ width: 200 }}
+              onChange={changeLanguageHandler}
+            >
+              <option value='en'>English</option>
+              <option value='fa'>فارسی</option>
+            </select>
+          </div>
+          <Routes>
+            {routes.map((route) => {
+              return (
+                <Route
+                  key={route.path}
+                  path={route.path}
+                  element={
+                    route.protected ? (
+                      <ProtectedRoute isLogin={login}>
+                        <route.component />
+                      </ProtectedRoute>
+                    ) : (
+                      <route.component />
+                    )
+                  }
+                />
+              );
+            })}
+          </Routes>
+        </Suspense>
+      )}
     </div>
-  )
-}
+  );
+};
 
-export default App
+export default App;
