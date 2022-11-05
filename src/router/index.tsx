@@ -1,8 +1,8 @@
 import { lazy, LazyExoticComponent } from 'react';
-import Home from '../pages/login/home';
 
 const Login = lazy(() => import('../pages/login'));
 const Register = lazy(() => import('../pages/register'));
+const Home = lazy(() => import('../pages/home'));
 
 interface IRoutes {
   name: string;

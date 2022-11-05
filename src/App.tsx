@@ -8,6 +8,7 @@ import useAuth from './utils/hooks/useAuth';
 import { useSelector } from 'react-redux';
 import { RootState } from './redux/store/store';
 import 'antd/dist/antd.css';
+import 'react-toastify/dist/ReactToastify.css';
 
 const App: React.FC = () => {
   const { i18n } = useTranslation();

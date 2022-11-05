@@ -1,9 +1,7 @@
 import { Controller, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import Input from '../../components/input/global/input';
-import { ToastContainer } from 'react-toastify';
-// import { toast, ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { toast, ToastContainer } from 'react-toastify';
 import { useMutation } from 'react-query';
 import { register, TRegister } from '../../services/authSrv';
 import { useNavigate } from 'react-router-dom';
@@ -13,13 +11,18 @@ function Register() {
   const { t } = useTranslation();
   const nav = useNavigate();
   const mutation = useMutation((body: TRegister) => register(body), {
-    onSuccess: () => {
+    onSuccess: (data) => {
+      console.log('data',data);
+      toast.success('success');
       nav('/login', { replace: true });
+    },
+    onError(error, variables, context) {
+      console.log(error);
     },
   });
   type FormValues = {
-    number: string;
     email: string;
+    number?: string;
     username: string;
     password: string;
     firstName: string;
@@ -30,8 +33,8 @@ function Register() {
     mode: 'onChange',
     delayError: 500,
     defaultValues: {
-      number: '',
       email: '',
+      number: '',
       username: '',
       password: '',
       firstName: '',
@@ -41,11 +44,11 @@ function Register() {
 
   return (
     <div className='w-full h-[100vh] flex text-black'>
-      <ToastContainer />
       <form
         onSubmit={handleSubmit((data) => {
           const employee = {
-            number: data.number,
+            email: data.email,
+            number: data?.number,
             username: data.username,
             password: data.password,
             firstName: data.firstName,
@@ -60,6 +63,14 @@ function Register() {
         </h2>
 
         <Controller
+          name='email'
+          control={control}
+          render={(props) => (
+            <Input {...props} type='email' placeholder={t('email')} />
+          )}
+        />
+
+        <Controller
           name='number'
           control={control}
           rules={{
@@ -68,14 +79,6 @@ function Register() {
           }}
           render={(props) => (
             <Input {...props} type='text' placeholder={t('number')} />
-          )}
-        />
-
-        <Controller
-          name='email'
-          control={control}
-          render={(props) => (
-            <Input {...props} type='email' placeholder={t('email')} />
           )}
         />
 

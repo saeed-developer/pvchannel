@@ -8,8 +8,9 @@ export type TRefresh = {
   refresh: string;
 };
 export type TRegister = {
-  number: string;
-  userName: string;
+  email: string;
+  number?: string;
+  username: string;
   password: string;
   firstName: string;
   lastName: string;
