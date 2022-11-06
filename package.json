@@ -13,7 +13,6 @@
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.5",
     "all": "^0.0.0",
-    "antd": "^4.24.0",
     "axios": "^1.1.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "husky": "^8.0.1",
@@ -21,6 +20,7 @@
     "i18next-browser-languagedetector": "^7.0.0",
     "i18next-http-backend": "^2.0.0",
     "react": "^18.2.0",
+    "react-bootstrap": "^2.5.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.36.1",
     "react-i18next": "^11.18.6",

@@ -1,7 +1,7 @@
-import { Controller, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import Input from '../../components/input/global/input';
-import { toast, ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
 import { useMutation } from 'react-query';
 import { register, TRegister } from '../../services/authSrv';
 import { useNavigate } from 'react-router-dom';
@@ -12,13 +12,13 @@ function Register() {
   const nav = useNavigate();
   const mutation = useMutation((body: TRegister) => register(body), {
     onSuccess: (data) => {
-      console.log('data',data);
+      console.log('data', data);
       toast.success('success');
       nav('/login', { replace: true });
     },
-    onError(error, variables, context) {
-      console.log(error);
-    },
+    // onError(error, variables, context) {
+    //   console.log(error);
+    // },
   });
   type FormValues = {
     email: string;
@@ -29,7 +29,12 @@ function Register() {
     lastName: string;
   };
 
-  const { handleSubmit, control } = useForm<FormValues>({
+  const {
+    handleSubmit,
+    control,
+    register,
+    formState: { errors },
+  } = useForm<FormValues>({
     mode: 'onChange',
     delayError: 500,
     defaultValues: {
@@ -56,71 +61,74 @@ function Register() {
           };
           mutation.mutate(employee);
         })}
-        className='h-2/4 my-auto mx-10 p-2 flex-1'
+        className='h-2/4 mt-24 mx-10 p-2 flex-1'
       >
         <h2 className='font-bold text-3xl border-b-4 mx-auto my-2 border-yellow-500 w-fit'>
           {t('register')}
         </h2>
 
-        <Controller
+        <Input
+          type='email'
           name='email'
           control={control}
-          render={(props) => (
-            <Input {...props} type='email' placeholder={t('email')} />
-          )}
+          placeholder={t('email')}
+          error={errors?.email?.message}
+          rules={{
+            required: `${t('required')}`,
+            pattern: {
+              value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+              message: 'invalid email address',
+            },
+          }}
         />
 
-        <Controller
+        <Input
           name='number'
           control={control}
+          placeholder={t('number')}
+          error={errors?.number?.message}
           rules={{
             minLength: { value: 11, message: `${t('minLength')}` },
             maxLength: { value: 13, message: `${t('maxLength')}` },
           }}
-          render={(props) => (
-            <Input {...props} type='text' placeholder={t('number')} />
-          )}
         />
 
-        <Controller
+        <Input
           name='username'
           control={control}
+          placeholder={t('userName')}
+          error={errors?.username?.message}
           rules={{ required: `${t('required')}` }}
-          render={(props) => (
-            <Input {...props} type='text' placeholder={t('userName')} />
-          )}
         />
 
-        <Controller
+        <Input
+          type='password'
           name='password'
           control={control}
+          placeholder={t('password')}
+          error={errors?.password?.message}
           rules={{
             required: `${t('required')}`,
             minLength: { value: 8, message: `${t('minLength')}` },
           }}
-          render={(props) => (
-            <Input {...props} type='password' placeholder={t('password')} />
-          )}
         />
 
-        <Controller
+        <Input
           name='firstName'
           control={control}
+          placeholder={t('firstName')}
+          error={errors?.firstName?.message}
           rules={{ required: `${t('required')}` }}
-          render={(props) => (
-            <Input {...props} type='text' placeholder={t('firstName')} />
-          )}
         />
 
-        <Controller
+        <Input
           name='lastName'
           control={control}
+          placeholder={t('lastName')}
+          error={errors?.lastName?.message}
           rules={{
             required: `${t('required')}`,
           }}
-          render={(props) => (
-            <Input {...props} type='text' placeholder={t('lastName')} />
-          )}
         />
 
         <div className='mt-[-1.5rem] text-xs'>

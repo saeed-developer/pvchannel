@@ -1,16 +1,57 @@
-function Input({ ...props }) {
+import { Controller } from 'react-hook-form';
+import PropTypes from 'prop-types';
+
+interface InputProps {
+  name: string;
+  type: string;
+  placeholder: string;
+  error?: string;
+  control?: any;
+  rules?: any;
+}
+
+function Input({ name, type, placeholder, error, control, rules }: InputProps) {
   return (
     <div className='my-8'>
-      <input
-        type={props.type}
-        value={props.field.value}
-        onChange={props.field.onChange}
-        placeholder={props.placeholder}
-        className='p-2 w-full bg-transparent border-b-2 border-gray-400 outline-none'
+      <Controller
+        name={name}
+        control={control}
+        rules={rules}
+        render={({ field }) => (
+          <div>
+            <input
+              type={type}
+              {...field}
+              // name={field.name}
+              // value={field.value}
+              // onChange={field.onChange}
+              autoFocus
+              placeholder={placeholder}
+              className='p-2 w-full bg-transparent border-b-2 border-gray-400 outline-none'
+            />
+            <p className='text-error'>{error}</p>
+          </div>
+        )}
       />
-      <p className='text-error'>{props?.fieldState?.error?.message}</p>
     </div>
   );
 }
+
+Input.prototype = {
+  name: PropTypes.string.isRequired,
+  type: PropTypes.string,
+  placeholder: PropTypes.string,
+  error: PropTypes.string,
+  rules: PropTypes.any,
+  control: PropTypes.any,
+};
+
+Input.defaultProps = {
+  type: 'text',
+  placeholder: '',
+  error: '',
+  rules: null,
+  control: null,
+};
 
 export default Input;
