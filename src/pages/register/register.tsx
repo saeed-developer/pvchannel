@@ -33,7 +33,6 @@ function Register() {
   const {
     handleSubmit,
     control,
-    register,
     formState: { errors },
   } = useForm<FormValues>({
     mode: 'onChange',

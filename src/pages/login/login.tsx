@@ -1,4 +1,4 @@
-import { Controller, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import Input from '../../components/input/global/input';
 import { ToastContainer } from 'react-toastify';
@@ -10,6 +10,7 @@ import { setAuth } from '../../redux/features/auth/authSlice';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import ButtonForm from '../../components/input/global/ButtonForm';
 
 function Login() {
   const { t } = useTranslation();
@@ -22,15 +23,19 @@ function Login() {
     },
   });
   type FormValues = {
-    userName: string;
+    username: string;
     password: string;
   };
 
-  const { handleSubmit, control } = useForm<FormValues>({
+  const {
+    handleSubmit,
+    control,
+    formState: { errors },
+  } = useForm<FormValues>({
     mode: 'onChange',
     delayError: 500,
     defaultValues: {
-      userName: '',
+      username: '',
       password: '',
     },
   });
@@ -41,7 +46,7 @@ function Login() {
       <form
         onSubmit={handleSubmit((data) => {
           const employee = {
-            username: data.userName,
+            username: data.username,
             password: data.password,
           };
           mutation.mutate(employee);
@@ -51,26 +56,27 @@ function Login() {
         <h2 className='font-bold text-3xl border-b-4 mx-auto my-2 border-yellow-500 w-fit'>
           {t('login')}
         </h2>
-        <Controller
-          name='userName'
+
+        <Input
+          name='username'
           control={control}
+          placeholder={t('userName')}
+          error={errors?.username?.message}
           rules={{ required: `${t('required')}` }}
-          render={(props) => (
-            <Input {...props} type='userName' placeholder={t('userName')} />
-          )}
         />
 
-        <Controller
+        <Input
+          type='password'
           name='password'
           control={control}
+          placeholder={t('password')}
+          error={errors?.password?.message}
           rules={{
             required: `${t('required')}`,
-            maxLength: { value: 8, message: `${t('maxLength')}` },
+            minLength: { value: 8, message: `${t('minLength')}` },
           }}
-          render={(props) => (
-            <Input {...props} type='password' placeholder={t('password')} />
-          )}
         />
+
         <div className='mt-[-1.5rem] text-xs'>
           <span className='ursor-pointer'>{t('forgetPass')}</span>
           <Link
@@ -80,12 +86,8 @@ function Login() {
             {t('register')}
           </Link>
         </div>
-        <input
-          type='submit'
-          value={t('login')}
-          className='bg-yellow-500 py-1 px-2 w-52 text-xl mt-6 cursor-pointer rounded-md text-gray-900'
-          style={mutation.isLoading ? { opacity: 0.7 } : { opacity: 1 }}
-        />
+
+        <ButtonForm text={t('login')} loading={mutation.isLoading} />
       </form>
       <div
         className={`flex-3 bg-yellow-500 w-8/12 h-full ${
