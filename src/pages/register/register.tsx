@@ -6,6 +6,7 @@ import { useMutation } from 'react-query';
 import { register, TRegister } from '../../services/authSrv';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import ButtonForm from '../../components/input/global/ButtonForm';
 
 function Register() {
   const { t } = useTranslation();
@@ -140,12 +141,7 @@ function Register() {
             {t('login')}
           </Link>
         </div>
-        <input
-          type='submit'
-          value={t('register')}
-          className='bg-yellow-500 py-1 px-2 w-52 text-xl mt-6 cursor-pointer rounded-md text-gray-900'
-          style={mutation.isLoading ? { opacity: 0.7 } : { opacity: 1 }}
-        />
+        <ButtonForm text={t('register')} loading={mutation.isLoading} />
       </form>
       <div
         className={`flex-3 bg-yellow-500 w-8/12 h-full ${

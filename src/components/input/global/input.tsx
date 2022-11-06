@@ -21,10 +21,11 @@ function Input({ name, type, placeholder, error, control, rules }: InputProps) {
           <div>
             <input
               type={type}
-              {...field}
-              // name={field.name}
-              // value={field.value}
-              // onChange={field.onChange}
+              // {...field}
+              name={field.name}
+              value={field.value}
+              onChange={field.onChange}
+              ref={field.ref}
               autoFocus
               placeholder={placeholder}
               className='p-2 w-full bg-transparent border-b-2 border-gray-400 outline-none'
