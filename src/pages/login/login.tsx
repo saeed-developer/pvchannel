@@ -1,9 +1,7 @@
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import Input from '../../components/input/global/input';
-import { ToastContainer } from 'react-toastify';
-// import { toast, ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { toast } from 'react-toastify';
 import { useMutation } from 'react-query';
 import { login, TLogin } from '../../services/authSrv';
 import { setAuth } from '../../redux/features/auth/authSlice';
@@ -20,6 +18,9 @@ function Login() {
     onSuccess: (data) => {
       dispatch(setAuth({ isLogin: true, token: data.data }));
       nav('/', { replace: true });
+    },
+    onError(error) {
+      toast.error(`${(error as any)?.response?.data?.message?.english}`);
     },
   });
   type FormValues = {
@@ -42,7 +43,6 @@ function Login() {
 
   return (
     <div className='w-full h-[100vh] flex text-black'>
-      <ToastContainer />
       <form
         onSubmit={handleSubmit((data) => {
           const employee = {

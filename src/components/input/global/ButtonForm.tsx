@@ -5,9 +5,10 @@ import PropTypes from 'prop-types';
 interface ButtonProps {
   text: string;
   loading: boolean;
+  onClick: () => void;
 }
 
-function ButtonForm({ text, loading }: ButtonProps) {
+function ButtonForm({ text, loading, onClick }: ButtonProps) {
   return (
     <div>
       {loading ? (
@@ -30,6 +31,7 @@ function ButtonForm({ text, loading }: ButtonProps) {
           variant='primary'
           type='submit'
           className='bg-yellow-500 py-1 px-2 w-52 text-xl mt-6 cursor-pointer rounded-md text-gray-900'
+          onClick={onClick}
         >
           {text}
         </Button>
@@ -41,11 +43,13 @@ function ButtonForm({ text, loading }: ButtonProps) {
 ButtonForm.prototype = {
   type: PropTypes.string,
   loading: PropTypes.bool,
+  onClick: PropTypes.func,
 };
 
 ButtonForm.defaultProps = {
   type: 'text',
   loading: false,
+  onClick: undefined,
 };
 
 export default ButtonForm;

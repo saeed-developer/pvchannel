@@ -11,16 +11,17 @@ import ButtonForm from '../../components/input/global/ButtonForm';
 function Register() {
   const { t } = useTranslation();
   const nav = useNavigate();
+
   const mutation = useMutation((body: TRegister) => register(body), {
     onSuccess: (data) => {
-      console.log('data', data);
-      toast.success('success');
+      toast.success(`${(data as any)?.data?.message?.english}`);
       nav('/login', { replace: true });
     },
-    // onError(error, variables, context) {
-    //   console.log(error);
-    // },
+    onError(error) {
+      toast.error(`${(error as any)?.response?.data?.message?.english}`);
+    },
   });
+
   type FormValues = {
     email: string;
     number?: string;
