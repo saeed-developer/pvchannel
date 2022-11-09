@@ -8,3 +8,8 @@ export const REFRESH = (): string => {
 export const REGISTER = (): string => {
   return 'auth/signup';
 };
+
+// chat contacts
+export const ALLCONTACTS = (): string => {
+  return 'chat/contacts/all';
+};
