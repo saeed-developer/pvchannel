@@ -1,12 +1,14 @@
-import { ALLCONTACTS } from './endpoints';
+import { ADDCONTACTS, ALLCONTACTS } from './endpoints';
 import { api } from './api';
+
 // export type TLogin = {
 //   username: string;
 //   password: string;
 // };
-// export type TRefresh = {
-//   refresh: string;
-// };
+
+export type TAddContact = {
+  id: number;
+};
 // export type TRegister = {
 //   email: string;
 //   number?: string;
@@ -18,6 +20,16 @@ import { api } from './api';
 const allContacts = async () => {
   return await api.get(ALLCONTACTS());
 };
+// const addContacts = async () => {
+//   return await api.post(ADDCONTACTS());
+// };
+const addContacts = async (body: TAddContact, token: any) => {
+  return await api.post(ADDCONTACTS(), body, {
+    headers: {
+      token: token,
+    },
+  });
+};
 // const refresh = async (body: TRefresh) => {
 //   return await api.post(REFRESH(), body);
 // };
@@ -25,4 +37,4 @@ const allContacts = async () => {
 //   return await api.post(REGISTER(), body);
 // };
 
-export { allContacts };
+export { allContacts, addContacts };

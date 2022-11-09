@@ -13,3 +13,7 @@ export const REGISTER = (): string => {
 export const ALLCONTACTS = (): string => {
   return 'chat/contacts/all';
 };
+
+export const ADDCONTACTS = (): string => {
+  return 'chat/contacts/add';
+};

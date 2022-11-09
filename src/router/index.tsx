@@ -3,6 +3,7 @@ import { lazy, LazyExoticComponent } from 'react';
 const Login = lazy(() => import('../pages/login'));
 const Register = lazy(() => import('../pages/register'));
 const Home = lazy(() => import('../pages/home'));
+const PostContacts = lazy(() => import('../pages/postContacts'));
 
 interface IRoutes {
   name: string;
@@ -19,4 +20,10 @@ export const routes: IRoutes[] = [
     protected: false,
   },
   { name: 'home', path: '/', component: Home, protected: true },
+  {
+    name: 'postContacts',
+    path: '/postContacts',
+    component: PostContacts,
+    protected: true,
+  },
 ];
