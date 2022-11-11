@@ -16,27 +16,60 @@ api.defaults.headers.common['token'] = auth.token.access;
 // const dispatch = useDispatch();
 api.interceptors.response.use(
   function (response: AxiosResponse<any, any>): void {
-    // Any status code that lie within the range of 2xx cause this function to trigger
-    // Do something with response data
-    // console.log('response', response);
     return response;
   },
-  function (error) {
-    // Any status codes that falls outside the range of 2xx cause this function to trigger
-    // Do something with response error
+  async function (error) {
+    const config = error.config;
     if (error.response.status === 401) {
       const token = store.getState().auth.token?.refresh as string;
+      const newToken = await refresh({ refresh: token });
+      // originalRequest.headers.token = newToken.data.access;
+      // console.log('newToken',newToken);
+      // console.log('originalRequest.headers.token',originalRequest.headers.token);
+      // console.log('originalRequest',originalRequest);
+      // axios.defaults.headers.common['Authorization'] = 'Bearer ' + newToken.data.access;
+      // api.defaults.headers.common['token'] = newToken.data.access;
+      config.headers = {
+        ...config.headers,
+        token: `${newToken.data.access}`,
+      };
+      console.log('newToken', newToken);
+      console.log('originalRequest', config);
+      return api(config);
+      // api.request(config);
+
       // console.log('token refresh', auth);
-      refresh({ refresh: token }).then((newToken) => {
-        // dispatch(setAuth({ isLogin: true, token: newToken.data }));
-        store.dispatch(setAuth({ isLogin: true, token: newToken.data }));
-        const config = error.config;
-        // console.log('token config', config.headers.token);
-        config.headers.token = newToken.data.access;
-        // console.log('token config2', config.headers.token);
-        // console.log('token newToken', newToken.data);
-        api.request(config);
-      });
+      // refresh({ refresh: token })
+      //   .then((newToken) => {
+      //     store.dispatch(setAuth({ isLogin: true, token: newToken.data }));
+      //     const config = error.config;
+      //     // console.log('token config', config.headers.token);
+      //     config.headers.token = newToken.data.access;
+      //     // console.log('token config2', config.headers.token);
+      //     // console.log('token newToken', newToken.data);
+      //     // console.log('token configgg', config);
+      //     // api.request(config);
+      //   })
+      //   .catch((error) => {
+      //     // console.log('token config',error);
+      //     if (error.response.status === 406) {
+      //       store.dispatch(resetAuth());
+      //     }
+      // });
+
+      // try {
+      //   const token = store.getState().auth.token?.refresh as string;
+      //   const newToken = await refresh({ refresh: token });
+      //   store.dispatch(setAuth({ isLogin: true, token: newToken.data }));
+      //   const config = error.config;
+      //   // console.log('token config', config.headers.token);
+      //   config.headers.token = newToken.data.access;
+      //   console.log('token config2', config.headers.token);
+      //   console.log('token newToken', newToken.data);
+      //   console.log('token configgg', config);
+      // } catch (error) {
+      //   console.log(error);
+      // }
 
       // try {
       //   const token = store.getState().auth.token?.refresh as string;
