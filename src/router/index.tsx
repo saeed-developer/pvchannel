@@ -4,6 +4,7 @@ const Login = lazy(() => import('../pages/login'));
 const Register = lazy(() => import('../pages/register'));
 const Home = lazy(() => import('../pages/home'));
 const PostContacts = lazy(() => import('../pages/postContacts'));
+const AllContacts = lazy(() => import('../pages/allContacts'));
 
 interface IRoutes {
   name: string;
@@ -24,6 +25,12 @@ export const routes: IRoutes[] = [
     name: 'postContacts',
     path: '/postContacts',
     component: PostContacts,
+    protected: true,
+  },
+  {
+    name: 'allContacts',
+    path: '/allContacts',
+    component: AllContacts,
     protected: true,
   },
 ];

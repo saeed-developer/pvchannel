@@ -3,7 +3,13 @@ import { addContacts, TAddContact } from '../../services/chatContactsSrv';
 import ButtonForm from '../../components/input/global/ButtonForm';
 import { useForm } from 'react-hook-form';
 import { useSelector } from 'react-redux';
+import Input from '../../components/input/global/input';
+import { useTranslation } from 'react-i18next';
+import { toast } from 'react-toastify';
+import { Link } from 'react-router-dom';
+
 function PostContacts() {
+  const { t } = useTranslation();
   const token = useSelector((state: any) => state.auth.token);
   const accessToken = token.access;
   //   console.log('token in add page', token);
@@ -13,7 +19,7 @@ function PostContacts() {
     {
       onSuccess: (data) => {
         console.log('error in data contact', data);
-        //   toast.success(`${(data as any)?.data?.message?.english}`);
+        toast.success(`${(data as any)?.data?.message?.english}`);
         //   nav('/login', { replace: true });
       },
       onError(error) {
@@ -24,18 +30,18 @@ function PostContacts() {
   );
 
   type FormValues = {
-    id: number;
+    id: string;
   };
 
   const {
     handleSubmit,
-    // control,
-    // formState: { errors },
+    control,
+    formState: { errors },
   } = useForm<FormValues>({
     mode: 'onChange',
     delayError: 500,
     defaultValues: {
-      id: 9,
+      id: '',
     },
   });
 
@@ -43,16 +49,25 @@ function PostContacts() {
     <div>
       <div>PostContacts</div>
       <button type='submit'>post</button>
+      <br />
+      <Link to='/'>back</Link>
       <form
         onSubmit={handleSubmit((data) => {
           const employee = {
-            id: 9,
+            id: data.id,
           };
-          console.log(data);
+          // console.log('data',data.id);
           mutation.mutate(employee);
         })}
         className='h-2/4 mt-24 mx-10 p-2 flex-1'
       >
+        <Input
+          name='id'
+          control={control}
+          placeholder={t('id')}
+          error={errors?.id?.message}
+          rules={{ required: `${t('required')}` }}
+        />
         <ButtonForm text='add' loading={mutation.isLoading} />
       </form>
     </div>

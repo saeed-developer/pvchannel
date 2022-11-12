@@ -15,7 +15,10 @@ function Home() {
       <ButtonForm text='Logout' onClick={() => handleLogout()} />
       <p>Home</p>
       <div className='grid'>
-        <ButtonForm text='all' />
+        <Link to='./allContacts'>
+          <ButtonForm text='all' />
+        </Link>
+
         <Link to='./postContacts'>
           <ButtonForm text='add' />
         </Link>
