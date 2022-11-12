@@ -24,11 +24,7 @@ const allContacts = async () => {
 //   return await api.post(ADDCONTACTS());
 // };
 const addContacts = async (body: TAddContact, token: any) => {
-  return await api.post(ADDCONTACTS(), body, {
-    headers: {
-      token: token,
-    },
-  });
+  return await api.post(ADDCONTACTS(), body);
 };
 // const refresh = async (body: TRefresh) => {
 //   return await api.post(REFRESH(), body);
