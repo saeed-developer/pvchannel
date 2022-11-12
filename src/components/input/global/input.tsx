@@ -30,7 +30,7 @@ function Input({ name, type, placeholder, error, control, rules }: InputProps) {
               placeholder={placeholder}
               className='p-2 w-full bg-transparent border-b-2 border-gray-400 outline-none'
             />
-            <p className='text-error'>{error}</p>
+            <p className='text-error text-sm'>{error}</p>
           </div>
         )}
       />

@@ -1,8 +1,8 @@
 import { IAuth } from './../redux/features/auth/authSlice';
 import { store } from './../redux/store/store';
-import { refresh, TRefresh, refresh } from '../services/authSrv';
+import { refresh, refresh, TRefresh } from '../services/authSrv';
 import { addContacts } from '../services/chatContactsSrv';
-import { setAuth, resetAuth } from '../redux/features/auth/authSlice';
+import { resetAuth, setAuth } from '../redux/features/auth/authSlice';
 import axios, { AxiosResponse } from 'axios';
 const auth: IAuth = store.getState().auth;
 export const api = axios.create({

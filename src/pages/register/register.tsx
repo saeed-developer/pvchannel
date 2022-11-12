@@ -7,10 +7,13 @@ import { register, TRegister } from '../../services/authSrv';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import ButtonForm from '../../components/input/global/ButtonForm';
+import usePasswordShow from '../../utils/hooks/usePasswordShow';
+import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
 
 function Register() {
   const { t } = useTranslation();
   const nav = useNavigate();
+  const [ToggleShow, visible, InputType] = usePasswordShow();
 
   const mutation = useMutation((body: TRegister) => register(body), {
     onSuccess: (data) => {
@@ -102,18 +105,22 @@ function Register() {
           rules={{ required: `${t('required')}` }}
         />
 
-        <Input
-          type='password'
-          name='password'
-          control={control}
-          placeholder={t('password')}
-          error={errors?.password?.message}
-          rules={{
-            required: `${t('required')}`,
-            minLength: { value: 8, message: `${t('minLength')}` },
-          }}
-        />
-
+        <div className='relative'>
+          <Input
+            type={InputType}
+            name='password'
+            control={control}
+            placeholder={t('password')}
+            error={errors?.password?.message}
+            rules={{
+              required: `${t('required')}`,
+              minLength: { value: 8, message: `${t('minLength')}` },
+            }}
+          />
+          <span className='absolute top-4 right-0' onClick={ToggleShow}>
+            {visible ? <AiFillEye /> : <AiFillEyeInvisible />}
+          </span>
+        </div>
         <Input
           name='firstName'
           control={control}
