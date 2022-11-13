@@ -1,36 +1,32 @@
 import { useMutation } from 'react-query';
-import { addContacts, TAddContact } from '../../services/chatContactsSrv';
+import { addContact, TIdContact } from '../../services/chatContactsSrv';
 import ButtonForm from '../../components/input/global/ButtonForm';
 import { useForm } from 'react-hook-form';
-import { useSelector } from 'react-redux';
 import Input from '../../components/input/global/input';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
 import { Link } from 'react-router-dom';
 
-function PostContacts() {
+function addNewContacts() {
   const { t } = useTranslation();
-  const token = useSelector((state: any) => state.auth.token);
-  const accessToken = token.access;
   //   console.log('token in add page', token);
   //   console.log('token access in add page', token.access);
-  const mutation = useMutation(
-    (body: TAddContact) => addContacts(body, accessToken),
-    {
-      onSuccess: (data) => {
-        console.log('error in data contact', data);
-        toast.success(`${(data as any)?.data?.message?.english}`);
-        //   nav('/login', { replace: true });
-      },
-      onError(error) {
-        console.log('error in post contact', error);
-        //   toast.error(`${(error as any)?.response?.data?.message?.english}`);
-      },
+  const mutation = useMutation((body: TIdContact) => addContact(body), {
+    onSuccess: (data) => {
+      console.log('error in data contact', data);
+      toast.success(`${(data as any)?.data?.message?.english}`);
+      //   nav('/login', { replace: true });
     },
-  );
+    onError(error) {
+      console.log('error in post contact', error);
+      if ((error as any).request.status === 500) {
+        toast.error('something was wrong');
+      }
+    },
+  });
 
   type FormValues = {
-    id: string;
+    id: number | undefined;
   };
 
   const {
@@ -41,13 +37,13 @@ function PostContacts() {
     mode: 'onChange',
     delayError: 500,
     defaultValues: {
-      id: '',
+      id: undefined,
     },
   });
 
   return (
     <div>
-      <div>PostContacts</div>
+      <div>addContact</div>
       <button type='submit'>post</button>
       <br />
       <Link to='/'>back</Link>
@@ -63,6 +59,7 @@ function PostContacts() {
       >
         <Input
           name='id'
+          type='number'
           control={control}
           placeholder={t('id')}
           error={errors?.id?.message}
@@ -74,4 +71,4 @@ function PostContacts() {
   );
 }
 
-export default PostContacts;
+export default addNewContacts;

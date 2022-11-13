@@ -1,4 +1,4 @@
-import { ADDCONTACTS, ALLCONTACTS } from './endpoints';
+import { ADDCONTACT, ALLCONTACTS, DELETECONTACT } from './endpoints';
 import { api } from './api';
 
 // export type TLogin = {
@@ -6,8 +6,8 @@ import { api } from './api';
 //   password: string;
 // };
 
-export type TAddContact = {
-  id: string;
+export type TIdContact = {
+  id: number | undefined;
 };
 // export type TRegister = {
 //   email: string;
@@ -23,8 +23,12 @@ const allContacts = async () => {
 // const addContacts = async () => {
 //   return await api.post(ADDCONTACTS());
 // };
-const addContacts = async (body: TAddContact, token: any) => {
-  return await api.post(ADDCONTACTS(), body);
+const addContact = async (body: TIdContact) => {
+  return await api.post(ADDCONTACT(), body);
+};
+
+const deleteContact = async (body: TIdContact) => {
+  return await api.post(DELETECONTACT(), body);
 };
 // const refresh = async (body: TRefresh) => {
 //   return await api.post(REFRESH(), body);
@@ -33,4 +37,4 @@ const addContacts = async (body: TAddContact, token: any) => {
 //   return await api.post(REGISTER(), body);
 // };
 
-export { allContacts, addContacts };
+export { allContacts, addContact, deleteContact };

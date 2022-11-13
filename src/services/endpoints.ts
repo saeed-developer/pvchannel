@@ -14,6 +14,10 @@ export const ALLCONTACTS = (): string => {
   return 'chat/contacts/all';
 };
 
-export const ADDCONTACTS = (): string => {
+export const ADDCONTACT = (): string => {
   return 'chat/contacts/add';
+};
+
+export const DELETECONTACT = (): string => {
+  return 'chat/contacts/delete';
 };
