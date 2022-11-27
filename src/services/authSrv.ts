@@ -1,4 +1,4 @@
-import { LOGIN, REFRESH, REGISTER } from './endpoints';
+import { LOGIN, REFRESH, REGISTER,LOGOUT } from './endpoints';
 import { api } from './api';
 export type TLogin = {
   username: string;
@@ -15,6 +15,10 @@ export type TRegister = {
   firstName: string;
   lastName: string;
 };
+export type TLogout = {
+  token: string;
+};
+
 const login = async (body: TLogin) => {
   return await api.post(LOGIN(), body);
 };
@@ -24,5 +28,8 @@ const refresh = async (body: TRefresh) => {
 const register = async (body: TRegister) => {
   return await api.post(REGISTER(), body);
 };
+const logout = async (body: TLogout) => {
+  return await api.post(LOGOUT(), body);
+};
 
-export { login, refresh, register };
+export { login, refresh, register,logout };
