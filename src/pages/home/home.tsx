@@ -16,10 +16,10 @@ function Home() {
     <div className='w-full h-[100vh]'>
       <Sidebar />
       <div className='flex w-full h-full'>
-        <div className='bg-gray-100 ml-20 p-3 w-4/12'>
+        <div className='bg-gray-100 ml-20 p-3 w-4/12 relative'>
           <Calls />
         </div>
-        <div className='bg-red  w-8/12'>fffffffffffffffffffffffff</div>
+        <div className='w-8/12 bg-white'>chat</div>
       </div>
       {/* <ButtonForm text='Logout' onClick={() => handleLogout()} />
       <p>Home</p>
