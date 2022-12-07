@@ -3,7 +3,7 @@ import './App.css';
 import { Route, Routes } from 'react-router-dom';
 import { routes } from './router';
 import { useTranslation } from 'react-i18next';
-import ProtectedRoute from './components/input/global/protectedRoute';
+import ProtectedRoute from './components/global/protectedRoute';
 import useAuth from './utils/hooks/useAuth';
 import { useSelector } from 'react-redux';
 import { RootState } from './redux/store/store';
@@ -43,7 +43,7 @@ const App: React.FC = () => {
         </div>
       ) : (
         <Suspense fallback={<div>Loading...</div>}>
-          <div>
+          {/* <div>
             <select
               className='custom-select'
               style={{ width: 200 }}
@@ -52,7 +52,7 @@ const App: React.FC = () => {
               <option value='en'>English</option>
               <option value='fa'>فارسی</option>
             </select>
-          </div>
+          </div> */}
           <Routes>
             {routes.map((route) => {
               return (

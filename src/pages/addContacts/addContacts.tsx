@@ -1,8 +1,8 @@
 import { useMutation } from 'react-query';
 import { addContact, TIdContact } from '../../services/chatContactsSrv';
-import ButtonForm from '../../components/input/global/ButtonForm';
+import ButtonForm from '../../components/global/ButtonForm';
 import { useForm } from 'react-hook-form';
-import Input from '../../components/input/global/input';
+import Input from '../../components/global/input';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
 import { Link } from 'react-router-dom';

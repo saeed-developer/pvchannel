@@ -1,4 +1,4 @@
-import { LOGIN, REFRESH, REGISTER,LOGOUT } from './endpoints';
+import { LOGIN, LOGOUT, REFRESH, REGISTER } from './endpoints';
 import { api } from './api';
 export type TLogin = {
   username: string;
@@ -32,4 +32,4 @@ const logout = async (body: TLogout) => {
   return await api.post(LOGOUT(), body);
 };
 
-export { login, refresh, register,logout };
+export { login, refresh, register, logout };

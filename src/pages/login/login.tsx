@@ -1,6 +1,6 @@
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import Input from '../../components/input/global/input';
+import Input from '../../components/global/input';
 import { toast } from 'react-toastify';
 import { useMutation } from 'react-query';
 import { login, TLogin } from '../../services/authSrv';
@@ -8,7 +8,7 @@ import { setAuth } from '../../redux/features/auth/authSlice';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import ButtonForm from '../../components/input/global/ButtonForm';
+import ButtonForm from '../../components/global/ButtonForm';
 import usePasswordShow from '../../utils/hooks/usePasswordShow';
 import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
 
