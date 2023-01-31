@@ -9,6 +9,7 @@ import { Link } from 'react-router-dom';
 import ButtonForm from '../../components/global/ButtonForm';
 import usePasswordShow from '../../utils/hooks/usePasswordShow';
 import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
+import { MouseEventHandler } from 'react';
 
 function Register() {
   const { t } = useTranslation();
@@ -107,7 +108,7 @@ function Register() {
 
         <div className='relative'>
           <Input
-            type={InputType}
+            type={InputType as string}
             name='password'
             control={control}
             placeholder={t('password')}
@@ -117,7 +118,10 @@ function Register() {
               minLength: { value: 8, message: `${t('minLength')}` },
             }}
           />
-          <span className='absolute top-4 right-0' onClick={ToggleShow}>
+          <span
+            className='absolute top-4 right-0'
+            onClick={() => ToggleShow as MouseEventHandler<HTMLSpanElement>}
+          >
             {visible ? <AiFillEye /> : <AiFillEyeInvisible />}
           </span>
         </div>

@@ -1,7 +1,17 @@
 import { MdOutlineCallReceived } from 'react-icons/md';
 import { FaPhoneAlt, FaVideo } from 'react-icons/fa';
-
-function UserCall({ call }) {
+type TCall = {
+  image: string;
+  name: string;
+  date: string;
+  success: boolean;
+  type: string;
+  online: boolean;
+};
+interface UserCallProps {
+  call: TCall;
+}
+function UserCall({ call }: UserCallProps) {
   return (
     <div className='flex align-center justify-between my-2 py-2 pr-4'>
       <div className='flex'>

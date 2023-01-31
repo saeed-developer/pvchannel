@@ -1,6 +1,4 @@
 import { store } from './../redux/store/store';
-import { refresh, refresh, TRefresh } from '../services/authSrv';
-import { addContacts } from '../services/chatContactsSrv';
 import { resetAuth, setAuth } from '../redux/features/auth/authSlice';
 import axios, { AxiosResponse } from 'axios';
 import { refresh } from './authSrv';
