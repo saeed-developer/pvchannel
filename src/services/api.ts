@@ -3,7 +3,7 @@ import { resetAuth, setAuth } from '../redux/features/auth/authSlice';
 import axios, { AxiosResponse } from 'axios';
 import { refresh } from './authSrv';
 export const api = axios.create({
-  baseURL: 'http://157.90.38.118/',
+  baseURL: 'https://pvchannel.xyz/',
 });
 
 store.subscribe(() => {
