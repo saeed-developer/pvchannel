@@ -19,11 +19,11 @@ export default defineConfig({
         description: 'chat platform',
         theme_color: '#ffffff',
         icons: [
-          // {
-          //   src: '/public/',
-          //   sizes: '192x192',
-          //   type: 'image/png',
-          // },
+          {
+            src: '/chat.png',
+            sizes: '512x512',
+            type: 'image/png',
+          },
         ],
         start_url: '/',
         lang: 'en-US',

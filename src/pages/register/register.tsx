@@ -53,7 +53,7 @@ function Register() {
   });
 
   return (
-    <div className='w-full h-[100vh] flex text-black'>
+    <div className='w-full h-[100vh] flex justify-center text-black'>
       <form
         onSubmit={handleSubmit((data) => {
           const employee = {
@@ -66,9 +66,9 @@ function Register() {
           };
           mutation.mutate(employee);
         })}
-        className='h-2/4 mt-24 mx-10 p-2 flex-1'
+        className='w-3/12 my-auto mx-10 p-8 bg-white rounded'
       >
-        <h2 className='font-bold text-3xl border-b-4 mx-auto my-2 border-yellow-500 w-fit'>
+        <h2 className='font-bold text-3xl border-b-4 mx-auto my-2 border-primary-600 w-fit'>
           {t('register')}
         </h2>
 
@@ -143,22 +143,17 @@ function Register() {
           }}
         />
 
-        <div className='mt-[-1.5rem] text-xs'>
+        <div className='text-xs'>
           <span className='ursor-pointer'>{t('have_account')}</span>
           <Link
             to='/login'
-            className='mx-2 text-yellow-500 hover:text-yellow-600'
+            className='text-primary-600 hover:text-primary-400 p-2 cursor-pointer'
           >
             {t('login')}
           </Link>
         </div>
         <ButtonForm text={t('register')} loading={mutation.isLoading} />
       </form>
-      <div
-        className={`flex-3 bg-yellow-500 w-8/12 h-full ${
-          document.body.dir === 'rtl' ? 'clip-rtl-style' : 'clip-ltr-style'
-        } `}
-      ></div>
     </div>
   );
 }

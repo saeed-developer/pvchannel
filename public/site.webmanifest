@@ -1,0 +1,10 @@
+{
+  "name": "pvchannel",
+  "short_name": "pvchannel",
+  "description": "chat platform",
+  "theme_color": "#ffffff",
+  "icons": [],
+  "start_url": "/",
+  "lang": "en-US",
+  "orientation": "portrait-primary"
+}

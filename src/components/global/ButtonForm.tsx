@@ -10,12 +10,12 @@ interface ButtonProps {
 
 function ButtonForm({ text, loading, onClick }: ButtonProps) {
   return (
-    <div>
+    <div className='mt-auto'>
       {loading ? (
         <Button
           variant='primary'
           disabled
-          className='bg-yellow-500 opacity-50 py-1 px-2 w-52 text-xl mt-6 cursor-pointer rounded-md text-gray-900'
+          className='bg-primary-500 opacity-50 py-1 px-2 w-52 text-xl cursor-pointer rounded-md text-gray-900'
         >
           <Spinner
             as='span'
@@ -30,7 +30,7 @@ function ButtonForm({ text, loading, onClick }: ButtonProps) {
         <Button
           variant='primary'
           type='submit'
-          className='bg-yellow-500 py-1 px-2 w-52 text-xl mt-6 cursor-pointer rounded-md text-gray-900'
+          className='bg-primary-200 hover:bg-primary-300 py-2 px-2 w-full text-xl cursor-pointer rounded-sm text-white'
           onClick={onClick}
         >
           {text}

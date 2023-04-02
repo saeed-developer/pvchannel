@@ -46,7 +46,7 @@ function Login() {
   });
 
   return (
-    <div className='w-full h-[100vh] flex text-black'>
+    <div className='w-full h-[100vh] flex justify-center text-black'>
       <form
         onSubmit={handleSubmit((data) => {
           const employee = {
@@ -55,21 +55,22 @@ function Login() {
           };
           mutation.mutate(employee);
         })}
-        className='h-2/4 my-auto mx-10 p-2 flex-1'
+        className='w-3/12 my-auto mx-10 p-8 bg-white rounded'
       >
-        <h2 className='font-bold text-3xl border-b-4 mx-auto my-2 border-yellow-500 w-fit'>
+        <h2 className='font-bold text-3xl border-b-4 mx-auto my-2 border-primary-600 w-fit'>
           {t('login')}
         </h2>
 
-        <Input
-          name='username'
-          control={control}
-          placeholder={t('userName')}
-          error={errors?.username?.message}
-          rules={{ required: `${t('required')}` }}
-        />
-
-        <div className='relative'>
+        <div className='mb-12'>
+          <Input
+            name='username'
+            control={control}
+            placeholder={t('userName')}
+            error={errors?.username?.message}
+            rules={{ required: `${t('required')}` }}
+          />
+        </div>
+        <div className='relative mb-12'>
           <Input
             type={InputType as string}
             name='password'
@@ -89,23 +90,19 @@ function Login() {
           </span>
         </div>
 
-        <div className='mt-[-1.5rem] text-xs'>
+        <div className='text-xs'>
           <span className='ursor-pointer'>{t('forgetPass')}</span>
           <Link
             to='/register'
-            className='mx-2 text-yellow-500 hover:text-yellow-600'
+            className='text-primary-600 hover:text-primary-400 p-2 cursor-pointer'
           >
             {t('register')}
           </Link>
         </div>
-
-        <ButtonForm text={t('login')} loading={mutation.isLoading} />
+        <div className='mb-3'>
+          <ButtonForm text={t('login')} loading={mutation.isLoading} />
+        </div>
       </form>
-      <div
-        className={`flex-3 bg-yellow-500 w-8/12 h-full ${
-          document.body.dir === 'rtl' ? 'clip-rtl-style' : 'clip-ltr-style'
-        } `}
-      ></div>
     </div>
   );
 }
