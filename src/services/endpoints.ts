@@ -11,16 +11,3 @@ export const REGISTER = (): string => {
 export const LOGOUT = (): string => {
   return 'auth/logout';
 };
-
-// chat contacts
-export const ALLCONTACTS = (): string => {
-  return 'chat/contacts/all';
-};
-
-export const ADDCONTACT = (): string => {
-  return 'chat/contacts/add';
-};
-
-export const DELETECONTACT = (): string => {
-  return 'chat/contacts/delete';
-};
