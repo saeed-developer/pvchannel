@@ -1,11 +1,15 @@
 {
   "login": "login",
-  "userName": "userName",
-  "password": "password",
-  "forgetPass": "forget Password?",
+  "userName": "UserName",
+  "password": "Password",
+  "firstName": "First Name",
+  "lastName": "Last Name",
+  "number": "Number",
+  "email": "Email",
+  "forgotPass": "forgot Password?",
   "required": "this is requerd",
-  "minLength":"The number of characters is less than the limit.",
+  "minLength": "The number of characters is less than the limit.",
   "maxLength": "You exceeded the max length",
   "register": "register",
-  "have_account":"do you have account?"
+  "have_account": "do you have account?"
 }
