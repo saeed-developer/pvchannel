@@ -28,7 +28,7 @@ function Input({ name, type, placeholder, error, control, rules }: InputProps) {
               ref={field.ref}
               autoFocus
               placeholder={placeholder}
-              className='p-2 w-full bg-transparent border-b-2 border-gray-400 outline-none text-sm'
+              className='p-2 w-full bg-transparent border-b-2 border-primary-100 outline-none text-sm'
             />
             <p className='text-error text-sm'>{error}</p>
           </div>
