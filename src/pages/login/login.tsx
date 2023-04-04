@@ -55,7 +55,7 @@ function Login() {
           };
           mutation.mutate(employee);
         })}
-        className='w-3/12 my-auto mx-10 p-8 bg-white rounded-md shadow-lg'
+        className='xl:w-3/12 md:w-6/12 sm:w-8/12 w-full my-auto mx-10 p-8 bg-white rounded-md shadow-lg'
       >
         <h2 className='font-bold text-3xl border-b-4 mx-auto my-2 border-primary-600 w-fit'>
           {t('login')}

@@ -11,5 +11,5 @@
   "minLength": "The number of characters is less than the limit.",
   "maxLength": "You exceeded the max length",
   "register": "register",
-  "have_account": "do you have account?"
+  "have_account": "Do you have an account?"
 }
