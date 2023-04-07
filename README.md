@@ -6,7 +6,8 @@
 
 You can use this repository for authentication in any project.
 it multilanguage and supports **jwt** authentication method
-it has 2 pages, a **login** page and a **register** page.
+it has 3 pages, a **login** page, a **register** page and a home page.
+If the user is not logged in, cannot enter the home page
 this project creates with vite and uses tailwind for design.
 
 ## [Src](README.md)
@@ -14,11 +15,13 @@ this project creates with vite and uses tailwind for design.
 ### components:
 
 > > button and input components that are reusable are in this folder.
+> > protectedRoute component which checks whether the user is logged in or not is in this section
 > > in inputs, we use **react-hook-form** for validation.
 
 ### pages:
 
-> > login and register components are in this folder.
+> > login, register and home components are in this folder.
+> > user after login navigate to home page, in home page user can logged out.
 > > we use **react-query** for catching data.
 
 ### components:
