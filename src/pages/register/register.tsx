@@ -53,7 +53,7 @@ function Register() {
   });
 
   return (
-    <div className='w-full h-[100vh] flex justify-center text-black'>
+    <div className='flex justify-center mt-32 text-black'>
       <form
         onSubmit={handleSubmit((data) => {
           const employee = {

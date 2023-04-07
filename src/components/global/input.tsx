@@ -1,5 +1,4 @@
 import { Controller } from 'react-hook-form';
-import PropTypes from 'prop-types';
 
 interface InputProps {
   name: string;
@@ -37,22 +36,5 @@ function Input({ name, type, placeholder, error, control, rules }: InputProps) {
     </div>
   );
 }
-
-Input.prototype = {
-  name: PropTypes.string.isRequired,
-  type: PropTypes.string,
-  placeholder: PropTypes.string,
-  error: PropTypes.string,
-  rules: PropTypes.any,
-  control: PropTypes.any,
-};
-
-Input.defaultProps = {
-  type: 'text',
-  placeholder: '',
-  error: '',
-  rules: null,
-  control: null,
-};
 
 export default Input;
