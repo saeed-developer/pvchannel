@@ -20,7 +20,6 @@ function Input({ name, type, placeholder, error, control, rules }: InputProps) {
           <div>
             <input
               type={type}
-              // {...field}
               name={field.name}
               value={field.value}
               onChange={field.onChange}

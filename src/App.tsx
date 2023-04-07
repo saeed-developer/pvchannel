@@ -37,7 +37,6 @@ const App: React.FC = () => {
             key={lng}
             style={{
               fontWeight: i18n.resolvedLanguage === lng ? 'bold' : 'normal',
-              // backgroundColor: i18n.resolvedLanguage == lng ? 'red' : 'blue',
             }}
             type='submit'
             onClick={() => changeLanguageHandler(lng)}
