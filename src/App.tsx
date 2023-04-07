@@ -1,6 +1,6 @@
-import React, { Suspense, useEffect } from 'react';
+import React, { Suspense } from 'react';
 import './App.css';
-import { Route, Routes, useNavigate } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import { routes } from './router';
 import useAuth from './utils/hooks/useAuth';
 import { useSelector } from 'react-redux';
@@ -8,6 +8,7 @@ import { RootState } from './redux/store/store';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import i18n from './i18n';
+import ProtectedRoute from './components/global/protectedRoute';
 
 const lngs = {
   en: { nativeName: 'English' },
@@ -17,13 +18,6 @@ const lngs = {
 const App: React.FC = () => {
   const [loading] = useAuth();
   const login = useSelector((state: RootState) => state.auth.isLogin);
-  const nav = useNavigate();
-
-  useEffect(() => {
-    if (!login) {
-      nav('/login');
-    }
-  }, []);
 
   const changeLanguageHandler = (lng: string) => {
     if (lng === 'fa') {
@@ -74,7 +68,15 @@ const App: React.FC = () => {
                 <Route
                   key={route.path}
                   path={route.path}
-                  element={<route.component />}
+                  element={
+                    route.protected ? (
+                      <ProtectedRoute isLogin={login}>
+                        <route.component />
+                      </ProtectedRoute>
+                    ) : (
+                      <route.component />
+                    )
+                  }
                 />
               );
             })}

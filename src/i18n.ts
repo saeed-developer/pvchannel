@@ -30,6 +30,8 @@ i18n
           maxLength: 'You exceeded the max length',
           register: 'register',
           have_account: 'Do you have an account?',
+          logout_title: 'Click to exit',
+          logout: 'Logout',
         },
       },
       fa: {
@@ -46,6 +48,8 @@ i18n
           maxLength: 'تعداد کاراکتر بیش از حد مجاز میباشد',
           register: 'ثبت نام',
           have_account: 'اکانت دارید؟',
+          logout_title: 'برای خروج کلیک کنید',
+          logout: 'خروج',
         },
       },
     },
