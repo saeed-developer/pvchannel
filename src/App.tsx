@@ -9,8 +9,13 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import i18n from './i18n';
 import ProtectedRoute from './components/global/protectedRoute';
+type TLanguage = {
+  [key: string]: {
+    nativeName: string;
+  };
+};
 
-const lngs = {
+const lngs : TLanguage = {
   en: { nativeName: 'English' },
   fa: { nativeName: 'فارسی' },
 };
@@ -41,7 +46,7 @@ const App: React.FC = () => {
             type='submit'
             onClick={() => changeLanguageHandler(lng)}
           >
-            {lngs[lng].nativeName}
+            {lngs[lng].nativeName }
           </button>
         ))}
       </div>

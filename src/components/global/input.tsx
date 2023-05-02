@@ -2,7 +2,7 @@ import { Controller } from 'react-hook-form';
 
 interface InputProps {
   name: string;
-  type: string;
+  type?: string;
   placeholder: string;
   error?: string;
   control?: any;
